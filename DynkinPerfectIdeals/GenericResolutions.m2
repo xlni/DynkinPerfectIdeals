@@ -346,10 +346,6 @@ topComplex (List,Matrix) := ChainComplex => (frmt,subm) -> (
 	);
     return chainComplex(apply(1..len,i->d#i))
     );
-topComplex List := ChainComplex => frmt -> (
-    if #frmt==5 then return topComplex(frmt,genericGorIndexing(frmt#1)) else
-    return topComplex(frmt,genericBigrade(frmt,QQ))
-    );
 topComplex (ZZ,List,Matrix) := HashTable => (s,frmt,subm) -> (
     kk := QQ;
     algname := formatLookup frmt;

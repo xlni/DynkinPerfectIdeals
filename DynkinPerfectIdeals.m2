@@ -14,9 +14,9 @@ newPackage(
     )
 
 export {
-    "LieAlgebraCache",
-    "fillBracket",
-    "Jacobi",
+--    "LieAlgebraCache",
+--    "fillBracket",
+--    "Jacobi",
     "name",
     "newRep",
     "Ltog",
@@ -31,15 +31,14 @@ export {
     "generate",
     "subRep",
     "quotientRep",
-    "alg",
     "gl",
-    "igl",
+--    "igl",
     "tr",
     "wedgeDiag",
     "isl",
     "sl",
     "psl",
-    "completeIrrepAction",
+--    "completeIrrepAction",
     "extendMap",
     "trivialRep",
     "invariants",
@@ -53,18 +52,15 @@ export {
     "tensorRep",
     "dualRep",
     "bracket",
-    "repFromGradedAction",
-    "completeGradedAction",
+--    "repFromGradedAction",
+--    "completeGradedAction",
     "parametricAction",
-    "adj",
     "extremalRep",
-    "genericBigrade",
     "genericMultigrade",
     "topComplex",
     "genericGorIndexing",
-    "lengthThreeVars",
     "subAlgebra",
-    "safeInc",
+--    "safeInc",
     "algebra",
     "Sign",
     "defectLieAlgebraDual",
@@ -94,3 +90,6 @@ load "./DynkinPerfectIdeals/LieAlgebras.m2"
 load "./DynkinPerfectIdeals/GenericResolutions.m2"
 
 end
+uninstallPackage "DynkinPerfectIdeals"
+restart
+installPackage "DynkinPerfectIdeals"
