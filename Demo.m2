@@ -1,3 +1,4 @@
+installPackage "DynkinPerfectIdeals";
 -----------------------------------------------
 -- 1. Constructing Ftop in familiar notation --
 -----------------------------------------------
@@ -12,6 +13,8 @@ F = topComplex(frmt,ggen)
 
 --a command to display degrees and #terms:
 mapInfo F.dd_3
+
+F.dd_3_(0,0)
 
 --note in particular that this output is single-graded
 
@@ -87,6 +90,7 @@ Fran = topComplex(frmt,gran); I = ideal F.dd_1;
 isHomogeneous Fran
 prune HH Fran
 codim I
+betti Fran
 
 needsPackage "ResidualIntersections"
 isLicci I
@@ -126,3 +130,31 @@ l' = {-2,4,5,-5,0,0}
 
 --(3,3,3,5,5) #6
 l' = {0,4,4,-5,0,0}
+
+-------------------------------------
+-- 4: Working with representations --
+-------------------------------------
+--One of the next steps is to extend this package to allow for computation
+--of higher structure maps for any starting resolution.
+--Some of the tools below may be helpful for that
+needsPackage "DynkinPerfectIdeals"
+
+g = lieAlgebra("E",6)
+V = adjointRep g
+
+V' = schurRep({1,1},V,id_(exteriorPower(2,module V)))
+
+--highest weight vectors
+hwv = invariants(g.cache#"e",V');
+--so there are two irreducible components
+
+--here are their weights
+--(luckily the two columns of the output were already h-eigenvectors)
+(action V')*(g.cache#"h"**hwv_{0})//hwv_{0}
+(action V')*(g.cache#"h"**hwv_{1})//hwv_{1}
+
+--adjoint sitting inside V'
+V1 = generate(hwv_{0},V');
+--the other part
+V2 = generate(hwv_{1},V');
+
