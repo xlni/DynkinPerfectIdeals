@@ -308,6 +308,7 @@ genericMultigrade (LieAlgebra,Thing) := Matrix => (g,x) -> (
 	    );
     	hgrade = new HashTable from newhgrade
 	);
+    hgrade = applyPairs(hgrade, (k,v) -> if not all(k,zero) then (k,v)); --remove the part for the Cartan
     numvars := applyValues(hgrade, v -> numcols gens v);
     varl := transpose flatten apply(pairs hgrade,
 	(k,v) -> apply(toList(1..(numcols gens v)), i -> {k,x_((toSequence (-k))|(1:i))})
@@ -460,9 +461,9 @@ topComplex (ZZ,List,Matrix) := HashTable => (s,frmt,subm) -> (
 	*exp(parametricAction(V,subm))
 	*sub(V_[MAXV-1,MAXV]*itop*topid,R)
 	);
-    -----------------------------------------------------------------------------
-    -- III: return the differential, which may be the dual of the computed map --
-    -----------------------------------------------------------------------------
+    ----------------------------------
+    -- III: return the differential --
+    ----------------------------------
     if #frmt==4 then (
     	if s==2 then return dual rawd else return rawd
 	) else
@@ -479,7 +480,9 @@ topComplex (ZZ,List,Matrix) := HashTable => (s,frmt,subm) -> (
 	if s==4 then return rawd
 	)
     )
+-*
 topComplex (ZZ,List) := HashTable => (s,frmt) -> (
     if #frmt==5 then return topComplex(s,frmt,genericGorIndexing(frmt#1)) else
     return topComplex(s,frmt,genericBigrade(frmt,QQ))
     );
+*-
